@@ -7,7 +7,6 @@ import random
 import cvxpy as cp
 from random import randrange
 import time
-import scipy as sp
 from abc import ABC, abstractmethod
 import scipy.linalg as la
 

@@ -7,7 +7,6 @@ import random
 import cvxpy as cp
 from random import randrange
 import time
-import scipy as sp
 from abc import ABC, abstractmethod
 import scipy.linalg as la
 
@@ -31,7 +30,7 @@ def EVI(ite, U, hattheta, beta, phi, phiv, reward, S, A, d, gamma):
                 running_sum += phi(s, a, s_prime)
                 running_matrix = np.concatenate((running_matrix, phi(s, a, s_prime)))
             running_matrix = running_matrix.reshape((-1, d))
-            soc_constraints += [running_matrix@x <= 1, running_matrix@x >= 0, running_sum@x == 1]]
+            soc_constraints += [running_matrix@x <= 1, running_matrix@x >= 0, running_sum@x == 1]
 
     for i in range(ite):
         for ss in range(S):
@@ -48,7 +47,7 @@ def EVI(ite, U, hattheta, beta, phi, phiv, reward, S, A, d, gamma):
                     prob.solve()
 
                 qq[ss,aa] = reward(ss,aa)+gamma*phi_v@x.value
-            vv[ss] = max(qq[ss])\
+            vv[ss] = max(qq[ss])
     return qq,vv
 
 def BVI(ite, sigma, hattheta, beta, phiv, reward, S, A, d, gamma):
